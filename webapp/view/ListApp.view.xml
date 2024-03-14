@@ -1,0 +1,86 @@
+<mvc:View controllerName="logali.applist.controller.ListApp"
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <IconTabBar>
+                <items>
+                    <IconTabFilter text="{i18n>objectList}">
+                        <List items="{product>/Products}">
+                            <items>
+                                <ObjectListItem title="{product>Material} {product>Brand} {product>Model}"
+                                                number="{product>Price}"
+                                                numberUnit="{product>Currency}"
+                                                type="Detail">
+                                    <ObjectAttribute text="{product>Brand}" />
+                                    <ObjectAttribute text="{product>Weight}" />
+                                </ObjectListItem>
+                            </items>
+                        </List>
+                    </IconTabFilter>
+                        
+                    <IconTabFilter text="{i18n>standardList}">
+                        <Select selectedKey="{/typeSelection}"> 
+                            <items>
+                                <core:Item key="None" text="{i18n>none}" />
+                                <core:Item key="MultiSelect" text="{i18n>multiSelect}" />
+                                <core:Item key="SingleSelect" text="{i18n>singleSelect}" />
+                                <core:Item key="SingleSelectLeft" text="{i18n>singleSelectLeft}" />
+                                <core:Item key="SingleSelectMaster" text="{i18n>singleSelectMaster}" />
+                            </items>
+                        </Select>
+
+                        <Button text="{i18n>showSelectedItems}" press="onShowSelectedRow" class="sapUiSmallMarginBegin" />
+                         <List id="standardList" items="{product>/Products}"
+                                mode="{/typeSelection}">
+                            <items>
+                                <StandardListItem title="{product>Material} {product>Brand} {product>Model}"
+                                                  description="{product>Weight}"
+                                                  info="{product>Price} {product>Currency}"
+                                                  type="Active" />
+                            </items>
+                        </List>
+                    </IconTabFilter>
+
+                    <IconTabFilter text="{i18n>inputList}">
+                         <List items="{product>/Products}">
+                            <InputListItem label="{product>Brand}">
+                                <Select items="{product>Properties}">
+                                    <core:Item key="{product>Id}" text="{product>Text}" />
+                                </Select>
+                            </InputListItem>
+                        </List>
+                    </IconTabFilter>
+
+                    <IconTabFilter text="{i18n>notificationList}">
+                        <List items="{product>/News}">
+                            <items>
+                                <NotificationListItem title="{product>Title}"
+                                                      description="{product>Description}"
+                                                      unread="{product>Unread}"
+                                                      authorName="{product>Author}"
+                                                      priority="{product>Priority}"
+                                                      showCloseButton="{product>ShowCloseButton}" />                            
+                            </items>
+                        </List>
+                    </IconTabFilter>
+
+                    <IconTabFilter text="{i18n>customList}">
+                        <List items="{product>/News}">
+                            <CustomListItem>
+                                <layout:Grid defaultSpan="XL3 L3 M6 S12">
+                                    <Text text="{product>Title}" />
+                                    <Text text="{product>Author}" />
+                                    <Text text="{product>Description}" />
+                                </layout:Grid>
+                            </CustomListItem>
+                        </List>
+                    </IconTabFilter>
+
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>
